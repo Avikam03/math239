@@ -279,7 +279,21 @@ If $T$ is a spanning tree of $G$ and $e$ is an edge in $T$ , then $T - e$ has 2 
 ### Lemma 5.3.1. 
 An odd cycle is not bipartite.
 
-An odd cycle is a cycle with an odd number of vertices.
+**Proof:**
+Consider the graph with cycle $C: x_1, x_2, \dots, x_k, x_1$. Let us assume that this cycle is bipartite. To classify the graph as bipartite, we need to partition all the vertices into two sets (say $A$ and $B$). Since we are dealing with an odd cycle, we know that $k$ is odd. WLOG, let $x_1$ be in $A$. Then, we can say that $x_2$ is in $B$, $x_3$ is in $A$, $x_4$ is in $B$, etc. Notice that it is easy to notice that we've put $x_i$ where $i$ is odd in $A$, and $x_i$ where $i$ is even in $B$. Since we know that $k$ is odd, we can safely put $x_k$ in $A$. However, $x_k$ and $x_1$ are adjacent to each other, and both belong in the same partition $A$. This is a contradiction. Thus, our assumption that an odd cycle is bipartite is wrong and an arbitrary odd cycle is NOT bipartite.
 
 ### Theorem 5.3.2.
 A graph is bipartite if and only if it has no odd cycles.
+
+**Proof:**
+$(\implies)$
+Let us assume that a graph $G$ is bipartite. From Lemma 5.3.1, we know that an odd cycle is not bipartite. Thus, we know that graph $G$ can not have odd cycles.
+Hence Proved.
+
+$(\impliedby)$
+We need to prove that If a graph has no odd cycles, then it is bipartite.
+We can alternatively also prove the contrapositive: If a graph is not bipartite, then it has an odd cycle.
+
+Let us assume that the graph $G$ is not bipartite. Since the graph $G$ is not bipartite, at least one of its components $H$ is not bipartite. Since $H$ is a component (is connected), we know that there exists a spanning tree $T$ inside $H$. We know that trees are bipartite, so we can create a bipartition $A, B$ of $T$. Since $H$ is not bipartite, we know that $(A, B)$ is not a bipartition of $H$. Thus, we know that there exists an edge $u, v$ in $H$ such that both $u$ and $v$ are in $A$ or both are in $B$. Since we can swap when needed, let us take $A$ for now.
+Since $T$ is spanning and connected, there must exist a $u, v$ path $P$ in $T$ of the form $u, x_1, x_2, x_3, \dots, x_n, v$. Note that since $u$ is in the partition $A$ and $T$ is bipartite, $x_1, x_2, x_3, \dots, x_n$ must alternate between $B$ and $A$. We can also notice that all $x_i$ where $i$ is even are in $A$ and all $x_i$ where $i$ is odd are in $B$. Since $v$ is in $A$, we know that $x_n$ must be in $B$. Thus, $n$ is odd!
+Now, consider the cycle created by $P$ and the edge $uv$. This cycle would look something like this: $u, x_1, x_2, \dots, x_n, v, u$. Since $n$ is odd, we know that the cycle has even vertices, and is thus of odd length. Thus, the graph has an odd cycle. Hence Proved.
