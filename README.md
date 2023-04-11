@@ -382,7 +382,7 @@ d^*(p - 2) &= d^*q - 2q \\
 \frac{d^*(p - 2)}{d^* - 2} &= q
 \end{align*}
 $$
-
+If $G$ is not connected, [incomplete proof].
 $\blacksquare$
 
 ### Theorem 7.5.3
@@ -466,4 +466,53 @@ An edge subdivision of a graph G is obtained by applying the following operation
 The operation of edge subdivision does not change planarity: if G is a planar graph, then all edge subdivisions of G are planar; if G is nonplanar, then all edge subdivisions of G are nonplanar. Similarly, note that if a graph G has a nonplanar subgraph, then G is nonplanar.
 
 From these observations, we can immediately conclude that if a graph G has a subgraph isomorphic to an edge subdivision of $K_{3,3}$ or $K_5$, then G is nonplanar.
+
+
+### k-colouring
+A **k-colouring** of a graph $G$ is a function from $V(G)$ to a set of size $k$ (whose elements are called **colours**), so that adjacent vertices always have different colours. A graph with a k-colouring is called a **k-colourable** graph.
+
+### Theorem 7.7.2
+A graph is 2-colourable if and only if it is bipartite.
+
+### Theorem 7.7.3
+$K_n$ is n-colourable and not k-colourable for any $k < n$.
+
+### Theorem 7.7.4
+Every planar graph is 6-colourable.
+
+**Proof:**
+The proof is by induction on the number of $p$ vertices.
+
+**Base Case:**
+$p = 1$. All graphs of one vertex are 6-colourable, so the result is true for $p = 1$.
+
+**Inductive Hypothesis:**
+Let us assume that all graphs where $p \leq k$ and $k \geq 1$ are 6-colourable.
+
+**Inductive Step:**
+Consider a graph with $p = k + 1$ vertices. From Corollary 7.7.5, we know that since $G$ is planar, $G$ has a vertex $v$ of degree at most $5$. Suppose we remove vertex $v$ and all edges incident to it. We then end up with a subgraph $H$ which has $k$ vertices. From our inductive hypothesis, we know that graph $H$ is 6-colourable. Now, we find a 6-colouring of $H$. There are at most $5$ vertices adjacent to $v$ in $G$, so these vertices are assigned at most $5$ different colours. Thus, there is at least one of the $6$ colours remaining. We can assign one of those colours to $v$, so that $v$ has a different colour than all of its adjacent vertices in $G$. Thus, we have a 6-colouring for $G$ and the inductive hypothesis is true for $k + 1$. Thus, hypothesis is true by POMI.
+
+### Contracting Edges
+Let $G$ be a graph and let $e = \{x, y\}$ be an edge of $G$. The graph $G - e$ obtained from $G$ by contracting the edge $e$ is the graph with vertex set $V(G) \ \{ x, y\} \cup {z}$, where $z$ is a new vertex, and edge set.
+$$
+\{ \{u, v \}\in E(G) : \{u, v\} \cap\{x, y\} = \phi\} \cup \{\{u, z\} : u \notin \{x, y\} , \{u, w\} \in E(G) \,\text{for some} \,w \in \{x, y\} \}
+$$
+
+### Theorem 7.7.6
+Every planar graph is 5-colourable. [check cn for proof]
+
+### Theorem 7.7.7
+Every planar graph is 4-colourable. [very hard proof. not in scope of course]
+
+### Dual Planar Maps
+Given a connected planar embedding $G$, the dual $G^*$ is a planar embedding constructed as follows: $G^*$ has one vertex for each face of $G$. Two vertices of $G*$ are joined by an edge whenever the corresponding faces of $G$ have an edge in common (one side for each face), and the edge in $G^*$ is drawn to cross this common boundary edge in $G$. 
+
+Key facts about relationship b/w $G$ and $G^*$:
+- A face of degree $k$ in $G$ becomes a vertex of degree $k$ in $G^*$
+- A vertex of degree $j$ in $G$ becomes a face of degree $j$ in $G^*$
+- $(G^*)^* = G$ 
+
+Note that a bridge in $G$ gives an edge in $G^*$ between a vertex and itself (such an edge is called a loop), and more than one edge between two faces in $G$ gives more than one edge between a pair of vertices (these are together called a multiple-edge). Thus, $G^*$ may be a multigraph, rather than a graph.
+
+This effectively shows how the four-colouring theorem for colouring vertices in planar graphs is equivalent to the Four Colour Theorem for colouring faces in Planar Embeddings via duality.
 
