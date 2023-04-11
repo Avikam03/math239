@@ -361,12 +361,12 @@ is a walk from $v_1$ to $v_0$ in $H - e_1$. Thus, by 4.10.3, $H$ contains a cycl
 $\blacksquare$
 
 #### Lemma 7.5.2
-Let $G$ be a planar embedding with $p$ vertices and $q$ edges. If each face of $G$ has degree at least $d^*$, then $(d^* - 2)q \leq d^* (p - 2)$.
+Let $G$ be a planar embedding with $p$ vertices and $q$ edges. If each face of $G$ has degree at least $d$, then $(d - 2)q \leq d (p - 2)$.
 
 **Proof:**
 We first deal with the case when $G$ is connected. Let $f_1, f_2, d_3, \dots, f_s$ be the faces of $G$. Thus, applying lemma 7.1.2, we get
 $$
-2q = \sum_{i = 1}^{s} \deg(f_i) \geq s(d^*)
+2q = \sum_{i = 1}^{s} \deg(f_i) \geq s(d)
 $$
 Also, by euler's formula we know that $p - q + s = 2$. We can rewrite this to obtain
 $$
@@ -375,11 +375,11 @@ $$
 Combining these two equations, we obtain
 $$
 \begin{align*}
-2q &\geq s(d^*) \\
-&= d^* (2 - p + q) \\
-&= 2d^* - d^*p + d^*q \\
-d^*(p - 2) &= d^*q - 2q \\
-\frac{d^*(p - 2)}{d^* - 2} &= q
+2q &\geq s(d) \\
+&= d (2 - p + q) \\
+&= 2d - dp + dq \\
+d(p - 2) &= dq - 2q \\
+\frac{d(p - 2)}{d - 2} &= q
 \end{align*}
 $$
 If $G$ is not connected, [incomplete proof].
@@ -401,7 +401,7 @@ $$q \leq p - 1 \leq 3p - 6$$
 In the other case, $G$ does contain a cycle. In that case, by Lemma 7.5.1, we know that every boundary face has contains a cycle. Since each cycle has a length of at least 3, each face has a degree of at least 3. We can thus use Lemma 7.5.2 to say that
 $$
 \begin{align*}
-q &\leq \frac{d^*(p - 2)}{(d^* - 2)} \\
+q &\leq \frac{d(p - 2)}{(d - 2)} \\
 &= \frac{3(p - 2)}{3 - 2} \\
 &= 3(p - 2) \\
 &= 3p - 6
@@ -505,14 +505,14 @@ Every planar graph is 5-colourable. [check cn for proof]
 Every planar graph is 4-colourable. [very hard proof. not in scope of course]
 
 ### Dual Planar Maps
-Given a connected planar embedding $G$, the dual $G^*$ is a planar embedding constructed as follows: $G^*$ has one vertex for each face of $G$. Two vertices of $G*$ are joined by an edge whenever the corresponding faces of $G$ have an edge in common (one side for each face), and the edge in $G^*$ is drawn to cross this common boundary edge in $G$. 
+Given a connected planar embedding $G$, the dual $G^d$ is a planar embedding constructed as follows: $G^d$ has one vertex for each face of $G$. Two vertices of $G^d$ are joined by an edge whenever the corresponding faces of $G$ have an edge in common (one side for each face), and the edge in $G^d$ is drawn to cross this common boundary edge in $G$. 
 
-Key facts about relationship b/w $G$ and $G^*$:
-- A face of degree $k$ in $G$ becomes a vertex of degree $k$ in $G^*$
-- A vertex of degree $j$ in $G$ becomes a face of degree $j$ in $G^*$
-- $(G^*)^* = G$ 
+Key facts about relationship b/w $G$ and $G^d$:
+- A face of degree $k$ in $G$ becomes a vertex of degree $k$ in $G^d$
+- A vertex of degree $j$ in $G$ becomes a face of degree $j$ in $G^d$
+- $(G^d)^d = G$ 
 
-Note that a bridge in $G$ gives an edge in $G^*$ between a vertex and itself (such an edge is called a loop), and more than one edge between two faces in $G$ gives more than one edge between a pair of vertices (these are together called a multiple-edge). Thus, $G^*$ may be a multigraph, rather than a graph.
+Note that a bridge in $G$ gives an edge in $G^d$ between a vertex and itself (such an edge is called a loop), and more than one edge between two faces in $G$ gives more than one edge between a pair of vertices (these are together called a multiple-edge). Thus, $G^d$ may be a multigraph, rather than a graph.
 
 This effectively shows how the four-colouring theorem for colouring vertices in planar graphs is equivalent to the Four Colour Theorem for colouring faces in Planar Embeddings via duality.
 
