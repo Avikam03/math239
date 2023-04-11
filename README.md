@@ -365,9 +365,7 @@ Let $G$ be a planar embedding with $p$ vertices and $q$ edges. If each face of $
 
 **Proof:**
 We first deal with the case when $G$ is connected. Let $f_1, f_2, d_3, \dots, f_s$ be the faces of $G$. Thus, applying lemma 7.1.2, we get
-$$
-2q = \sum_{i = 1}^{s} \deg(f_i) \geq s(d)
-$$
+$$2q = \sum_{i = 1}^{s} \deg(f_i) \geq s(d)$$
 Also, by euler's formula we know that $p - q + s = 2$. We can rewrite this to obtain
 $$
 s = 2 - p + q
@@ -399,14 +397,12 @@ and since $p \geq 3$, we also know that $p - 1 \leq 3p - 6$. We can easily verif
 Thus, we can say
 $$q \leq p - 1 \leq 3p - 6$$
 In the other case, $G$ does contain a cycle. In that case, by Lemma 7.5.1, we know that every boundary face has contains a cycle. Since each cycle has a length of at least 3, each face has a degree of at least 3. We can thus use Lemma 7.5.2 to say that
-$$
-\begin{align*}
+$$\begin{align*}
 q &\leq \frac{d(p - 2)}{(d - 2)} \\
 &= \frac{3(p - 2)}{3 - 2} \\
 &= 3(p - 2) \\
 &= 3p - 6
-\end{align*}
-$$
+\end{align*}$$
 $\blacksquare$
 
 ### Corollary 7.5.4
@@ -435,18 +431,14 @@ q \leq p - 1
 $$
 and since $p \geq 3$, we also know that $p - 1 \leq 2p - 4$. We can easily verify this by plotting out the graph.
 Thus, we can say
-$$
-q \leq p - 1 \leq 2p - 4
-$$
+$$q \leq p - 1 \leq 2p - 4$$
 
 The other case is when $G$ contains a cycle. In this case, by lemma 7.5.1, every face boundary contains a cycle. Since $G$ is bipartite, we know that it doesn't have a cycle of length $3$. Thus, the minimum length of a cycle in $G$ is $4$, and thus each face a degree at least $4$. By Lemma 7.5.2, we can thus say
-$$
-\begin{align*}
+$$ \begin{align*}
 q &\leq \frac{4(p - 2)}{4 - 2} \\
 &\leq 2(p - 2) \\
 &\leq 2p - 4
-\end{align*}
-$$
+\end{align*} $$
 Hence Proved
 
 ### Lemma 7.5.7
@@ -494,9 +486,7 @@ Consider a graph with $p = k + 1$ vertices. From Corollary 7.7.5, we know that s
 
 ### Contracting Edges
 Let $G$ be a graph and let $e = \{x, y\}$ be an edge of $G$. The graph $G - e$ obtained from $G$ by contracting the edge $e$ is the graph with vertex set $V(G) \ \{ x, y\} \cup {z}$, where $z$ is a new vertex, and edge set.
-$$
-\{ \{u, v \}\in E(G) : \{u, v\} \cap\{x, y\} = \phi\} \cup \{\{u, z\} : u \notin \{x, y\} , \{u, w\} \in E(G) \,\text{for some} \,w \in \{x, y\} \}
-$$
+$$ \{ \{u, v \}\in E(G) : \{u, v\} \cap\{x, y\} = \phi\} \cup \{\{u, z\} : u \notin \{x, y\} , \{u, w\} \in E(G) \,\text{for some} \,w \in \{x, y\} \} $$
 
 ### Theorem 7.7.6
 Every planar graph is 5-colourable. [check cn for proof]
