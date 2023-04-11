@@ -151,14 +151,10 @@ Let $x, y, z$ be vertices of $G$. If there is a path from $x$ to $y$ in $G$ and 
 
 ### Cycle
 A cycle in a graph $G$ is a subgraph with $n$ distinct vertices $v_0, v_1, \dots, v_{n - 1}$, $n \geq 1$, and n distinct edges $\{v_0, v_1\}, \{v_1, v_2\}, \dots,\{v_{n - 2}, v_{n - 1}\}, \{ v_{n - 1}, v_0\}$. Equivalently, a cycle is a connected graph that is regular of degree two.
-
-The subgraph we get from a cycle by deleting one edge is called a path.
-
-A cycle with n edges is called an n-cycle or a cycle of length n.
-
-The shortest possible cycle in a graph is a 3-cycle.
-
-there are 2n closed walks of length n associated with a given n-cycle.
+- The subgraph we get from a cycle by deleting one edge is called a path.
+- A cycle with n edges is called an n-cycle or a cycle of length n.
+- The shortest possible cycle in a graph is a 3-cycle.
+- There are 2n closed walks of length n associated with a given n-cycle.
 
 ### Theorem 4.6.4
 If every vertex in $G$ has degree at least 2, then $G$ contains a cycle.
@@ -295,5 +291,179 @@ We need to prove that If a graph has no odd cycles, then it is bipartite.
 We can alternatively also prove the contrapositive: If a graph is not bipartite, then it has an odd cycle.
 
 Let us assume that the graph $G$ is not bipartite. Since the graph $G$ is not bipartite, at least one of its components $H$ is not bipartite. Since $H$ is a component (is connected), we know that there exists a spanning tree $T$ inside $H$. We know that trees are bipartite, so we can create a bipartition $A, B$ of $T$. Since $H$ is not bipartite, we know that $(A, B)$ is not a bipartition of $H$. Thus, we know that there exists an edge $u, v$ in $H$ such that both $u$ and $v$ are in $A$ or both are in $B$. Since we can swap when needed, let us take $A$ for now.
-Since $T$ is spanning and connected, there must exist a $u, v$ path $P$ in $T$ of the form $u, x_1, x_2, x_3, \dots, x_n, v$. Note that since $u$ is in the partition $A$ and $T$ is bipartite, $x_1, x_2, x_3, \dots, x_n$ must alternate between $B$ and $A$. We can also notice that all $x_i$ where $i$ is even are in $A$ and all $x_i$ where $i$ is odd are in $B$. Since $v$ is in $A$, we know that $x_n$ must be in $B$. Thus, $n$ is odd!
+Since $T$ is spanning and connected, there must exist a $u, v$ path $P$ in $T$ of the form $u, x_1, x_2, x_3, \dots, x_n, v$. Note that since $u$ is in the partition $A$ and $T$ is bipartite, $x_1, x_2, x_3, \dots, x_n$ must alternate between $B$ and $A$. We can also notice that all $x_i$ where $i$ is even are in $A$ and all $x_i$ where $i$ is odd are in $B$. Since $v$ is in $A$, we know that $x_n$ must be in $B$. Thus, $n$ is odd! Adding $u$ and $v$, the $u, v$ path comes out to have $n + 2$ vertices (which is also odd).
 Now, consider the cycle created by $P$ and the edge $uv$. This cycle would look something like this: $u, x_1, x_2, \dots, x_n, v, u$. Since $n$ is odd, we know that the cycle has even vertices, and is thus of odd length. Thus, the graph has an odd cycle. Hence Proved.
+
+
+### Planar Graphs
+A graph $G$ is **planar** if it has a drawing in the plane so that its edges intersect only at their ends, and so that no two vertices coincide. The actual drawing is called a **planar embedding** of $G$, or a planar map
+
+### Face
+A **face** of a planar embedding is a connected region on the plane (not separated by the edges).
+
+### Boundary
+A **boundary** of a face is a subgraph of all vertices and edges that touch the face. Two faces are adjacent if they share at least one edge in their boundaries.
+
+### Boundary Walk
+For a connected planar embedding, the boundary walk of a face is a closed walk once around the perimeter of the face boundary. The degree of a face is $f$ is the length of its boundary walk, denoted by $deg(f)$.
+
+**Note:** If $G$ is not connected, the boundary walk may be disconnected. If so, we take a boundary walk around each component and sum them up to get its degree.
+
+### Faceshaking Lemma
+Let $G$ be a planar graph with a planar embedding where $F$ is the set of all faces. Then, $$\sum_{f \in F} \deg(f) = 2|E(G)|$$
+
+**Proof:**
+Each edge contributes two to the sum of face degrees, one for each side of the edge.
+
+### Corollary 7.1.3.
+If the connected graph $G$ has a panar embedding with $f$ faces, the average degree of a face in the embedding is $$ \frac{2E|G|}{f} $$
+### Lemma
+In a planar embedding, $e$ is a bridge if and only if the two sides of $e$ are in the same face.
+
+### Jordan Curve Theorem
+Every planar embedding of a cycle separates the plane into two parts, one on the inside, and one on the outside.
+
+### Euler's Formula
+Let $G$ be a connected planar graph with $n$ vertices and $m$ edges. Consider a planar embedding of $G$ with $s$ faces. Then, $$n - m + s = 2$$
+**Consequence**: For any planar embedding with $s$ faces, $s = 2 - n + m$. 
+$n$, $m$ are constant for a graph.
+
+**Proof:**
+We fix the number of vertices $n$. We prove by induction on the number of edges $m$.
+
+**Base Case:**
+The graph is connected, so it has a spanning tree which has $n - 1$ edges. Thus, our base case is $m = n - 1$. A connected graph with $n - 1$ edges is a Tree. Any planar embedding of a tree has $1$ face. Thus, $s = 1$. So, $n - m + s = n - (n - 1) + 1 = 2$.
+
+**Inductive Hypothesis:**
+Assume that Euler's Formula holds for any conneted planar graph with $n$ vertices and $m - 1$ edges.
+
+**Inductive Step**:
+Consider a connected planar graph with $n$ vertices, $m$ edges, and $s$ faces. Let $e$ be an edge that is not a bridge. Then, $G - e$  is connected by definition. Also, $G - e$ is a planar since we can remove $e$ from a planar embedding of $G$ to get a planar embedding of $G - e$. And $G - e$ has $m - 1$ edges. So, Euler's Formula holds for $G - e$ by induction.
+
+Since $e$ is not a bridge, the two sides of the edge are different faces. Thus, when we remove $e$ from the planar embedding of $G$ to obtain the planar embedding of $G - e$, the newly obtained planar embedding has 1 less face since the two faces on the different sides of the edge are now merged into one. Thus, embedding of $G - e$ has $s - 1$ faces. By Euler's formula, we can say
+$$n - (m - 1) + (s - 1) = 2$$
+This equation equates to $n - m + s = 2$, thus showing that Euler's formula holds for $G$.
+$\blacksquare$
+
+
+**Note:** If $G$ has $c$ components, then Euler's formula becomes $$n - m + s = 1 + c$$
+### Lemma 7.5.1
+If $G$ contains a cycle, then in a planar embedding of $G$, the boundary of each face contains a cycle.
+
+**Proof:**
+Since $G$ has a cycle, it has more than one face. Therefore, every face $f$ is adjacent to at least one more face say $g$.
+Let $e_1 = {v_0, v_1}$ be an edge that is incident with both $f$ and $g$. Let $H$ be the component in the boundary of the face $f$ containing edge $e_1$. Let
+$$W_f = (v_0, e_1, v_1, e_2, v_2, \dots, v_{n - 1}, e_n, v_0)$$
+be the boundary walk of $H$. Since the edge $e_1$ is incident with both $f$ and $g$, it is contained in $W_f$ exactly once.
+The edge $e_1$ is not a bridge of $H$ because 
+$$v_1, e_2, v_2, \dots, v_{n - 1}, e_n, v_0$$
+is a walk from $v_1$ to $v_0$ in $H - e_1$. Thus, by 4.10.3, $H$ contains a cycle.
+$\blacksquare$
+
+#### Lemma 7.5.2
+Let $G$ be a planar embedding with $p$ vertices and $q$ edges. If each face of $G$ has degree at least $d^*$, then $(d^* - 2)q \leq d^* (p - 2)$.
+
+**Proof:**
+We first deal with the case when $G$ is connected. Let $f_1, f_2, d_3, \dots, f_s$ be the faces of $G$. Thus, applying lemma 7.1.2, we get
+$$
+2q = \sum_{i = 1}^{s} \deg(f_i) \geq s(d^*)
+$$
+Also, by euler's formula we know that $p - q + s = 2$. We can rewrite this to obtain
+$$
+s = 2 - p + q
+$$
+Combining these two equations, we obtain
+$$
+\begin{align*}
+2q &\geq s(d^*) \\
+&= d^* (2 - p + q) \\
+&= 2d^* - d^*p + d^*q \\
+d^*(p - 2) &= d^*q - 2q \\
+\frac{d^*(p - 2)}{d^* - 2} &= q
+\end{align*}
+$$
+
+$\blacksquare$
+
+### Theorem 7.5.3
+In a planar graph $G$ with $p \geq 3$ vertices and $q$ edges, we have
+$$
+q \leq 3p - 6
+$$
+**Proof:**
+If $G$ does not contain cycle, then $G$ is a forest. In that case, we know from our corollary where $|E(G)| = |V(G)| - k$.
+$$
+q \leq p - 1
+$$
+and since $p \geq 3$, we also know that $p - 1 \leq 3p - 6$. We can easily verify this by plotting out the graph.
+Thus, we can say
+$$q \leq p - 1 \leq 3p - 6$$
+In the other case, $G$ does contain a cycle. In that case, by Lemma 7.5.1, we know that every boundary face has contains a cycle. Since each cycle has a length of at least 3, each face has a degree of at least 3. We can thus use Lemma 7.5.2 to say that
+$$
+\begin{align*}
+q &\leq \frac{d^*(p - 2)}{(d^* - 2)} \\
+&= \frac{3(p - 2)}{3 - 2} \\
+&= 3(p - 2) \\
+&= 3p - 6
+\end{align*}
+$$
+$\blacksquare$
+
+### Corollary 7.5.4
+$K_5$ is not planar
+
+**Proof:** $|E(K_5)| = {5 \choose 2} = 10$
+
+From Theorem 7.5.3, we know that for planar graphs with $p \geq 3$,  $q \leq 2p - 6$. In this case, theorem tells us that $q \leq 3(5) - 6) = 9$. However, $10 > 9$, so $K_5$ is not planar.
+
+### Corollary 7.5.5
+A planar graph has a vertex of degree at most $5$.
+
+**Proof:** This is naturally true when $p \leq 2$. Otherwise, if $p \geq 3$, then theorem 7.5.3 tells us that $$q \leq 3p - 6$$
+We can rewrite this as 
+$$\frac{2q}{p} \leq 6 - \frac{12}{p}$$
+This tells us that the average degree of the graph is lesser than 6. Thus, there needs to be at least one vertex of degree $\leq 5$.
+
+### Theorem 7.5.6
+In a bipartite planar graph $G$ with $p \geq 3$ vertices and $q$ edges, we have
+$$q \leq 2q - 4$$
+
+**Proof:**
+If $G$ does not contain a cycle, then $G$ is a forest. In this case, we know from our corollary where $|E(G)| = |V(G)| - k$ that
+$$
+q \leq p - 1
+$$
+and since $p \geq 3$, we also know that $p - 1 \leq 2p - 4$. We can easily verify this by plotting out the graph.
+Thus, we can say
+$$
+q \leq p - 1 \leq 2p - 4
+$$
+
+The other case is when $G$ contains a cycle. In this case, by lemma 7.5.1, every face boundary contains a cycle. Since $G$ is bipartite, we know that it doesn't have a cycle of length $3$. Thus, the minimum length of a cycle in $G$ is $4$, and thus each face a degree at least $4$. By Lemma 7.5.2, we can thus say
+$$
+\begin{align*}
+q &\leq \frac{4(p - 2)}{4 - 2} \\
+&\leq 2(p - 2) \\
+&\leq 2p - 4
+\end{align*}
+$$
+Hence Proved
+
+### Lemma 7.5.7
+$K_{3, 3}$ is not planar.
+
+**Proof:**
+We have $|E(K_{3, 3})| = 3 \cdot 3 = 9$
+
+Theorem 7.5.6 tells us that a bipartite planar graph $G$ with $p \geq 3$ and $q$ edges should have $q \leq 2p - 4$. In this case, since $p = 6$, we should have $q \leq 12 - 4 = 8$. However, $q = 9$. Thus $K_{3, 3}$ is not planar.
+
+### Kuratowski’s Theorem (Theorem 7.6.1)
+A graph is not planar if and only if it has a subgraph that is an edge subdivision of $K_5$ or $K_{3, 3}$.
+
+Main Idea:
+An edge subdivision of a graph G is obtained by applying the following operation, independently, to each edge of G: replace the edge by a path of length 1 or more; if the path has length $m > 1$, then there are $m - 1$ new vertices and $m - 1$ new edges created; if the path has length $m = 1$, then the edge is unchanged.
+
+The operation of edge subdivision does not change planarity: if G is a planar graph, then all edge subdivisions of G are planar; if G is nonplanar, then all edge subdivisions of G are nonplanar. Similarly, note that if a graph G has a nonplanar subgraph, then G is nonplanar.
+
+From these observations, we can immediately conclude that if a graph G has a subgraph isomorphic to an edge subdivision of $K_{3,3}$ or $K_5$, then G is nonplanar.
+
