@@ -506,3 +506,96 @@ Note that a bridge in $G$ gives an edge in $G^d$ between a vertex and itself (su
 
 This effectively shows how the four-colouring theorem for colouring vertices in planar graphs is equivalent to the Four Colour Theorem for colouring faces in Planar Embeddings via duality.
 
+### Matching
+A **matching** in a graph $G$ is a set $M$ of edges of $G$ such that no two edges in $M$ have a common end.
+
+We say that a vertex $v$ of $G$ is **saturated** by $M$, or that $M$ saturates $v$, if $v$ is incident with an edge in $M$.
+
+A special kind of maximum matching is one having size $\dfrac{p}{2}$, that is, one that saturates every vertex, called a **perfect matching**.
+
+### Alternating Path
+We say that a path $v_0, v_1, v_2, \dots, v_n$ is an alternating path with respect to $M$ if one of the following is true:
+- $\{v_i, v_{i + 1}\} \in M$ if $i$ is even and $\{v_{i}, v_{i + 1}\} \notin M$ if $i$ is odd
+- $\{v_i, v_{i + 1}\} \notin M$ if $i$ is even and $\{v_{i}, v_{i + 1}\} \in M$ if $i$ is odd
+
+### Augmenting Path
+An augmenting path with respect to $M$ is an alternating path joining two distinct vertices neither of which is saturated by $M$.
+
+### Lemma 8.1.1
+If $M$ has an augmenting path, it is not a maximum matching.
+
+### Cover
+A cover of a graph $G$ is a set C $of$ vertices such that every edge of G $has$ at least one end in $C$.
+
+### Lemma 8.2.1
+If $M$ is a matching of $G$ and $C$ is a cover of $G$, then $|M| \leq |C|$
+
+### Lemma 8.2.2
+If $M$ is matching and $C$ is a cover and $|M|=|C|$, then $M$ is a maximum matching and $C$ is a minimum cover.
+
+Given a matching $M$ and an augmenting path with set $E(P)$, the new matching $M'$ is:
+$$M' = [M \cup (E(P) \setminus M)] \setminus (E(P) \cap M)$$
+
+### König’s Theorem
+In a bipartite graph the maximum size of a matching is the minimum size of a cover.
+
+It might seem trivial to state this after we've seen Lemma 8.2.1, by which $|M| \leq |C|$, but that is not the case. Though $|M| = |C|$ or the maximum size of a matching is the same size as a minimum cover occurs is true for bipartite graphs, it is not the case for all graphs. Example: A minimum cover for $K_p$ has size $p - 1$ and a maximum matching has size $\lfloor \dfrac{p}{2} \rfloor$.
+
+Let $X_0$ be the set of vertices in $A$ not satured by $M$, and let $Z$ denote the set of vertices in $G$ that are joined by a vertex in $X_0$ by an alternating path.If $v \in Z$, then let $P(v)$ denote the alternating path that joins $v$ to $X_0$. Now, define
+- $X = A \cup Z$
+- $Y = B \cup Z$
+
+Note that any alternating path has $P(v)$ has even length if $v \in X$ and odd length if $v \in Y$. Since the first edge in any alternating path starts from an unsatured vertex, we know that the first edge is not in a matching. The second edge, and every alternate edge from there is in a matching.
+- If $v \in X$, then the last edge of $P(v)$ is in $M$
+- if $v \in Y$, then the last edge of $P(v)$ is not in $M$.
+
+### Lemma 8.3.2
+Let $M$ be a matching of a bipartite graph $G$ with bipartition $A, B,$ and let $X$ and $Y$ be defined as above. Then:
+1. There is no edge of $G$ from $X$ to $B \setminus Y$.
+2. $C = Y \cup (A \setminus X)$
+3. There is no edge of $M$ from $Y$ to $A \setminus X$.
+4. $|M| = |C| - |U|$ where $U$ is the set of unsatured vertices in $Y$.
+5. There is an augmenting path to each vertex in $U$.
+
+**Proof:**
+1. Suppose that this is false. In that case, for a vertex $u \in X$ and $v \in B \setminus Y$, there exists an edge $e: \{u, v\}$ in the graph $G$. However, this would mean that we could add the edge $e$ to the even alternating path $P(u)$ from $X_0$ to get an odd alternating path to $v$, which would mean that $v \in Y$, a contradiction.
+2. The only edges that are not adjacent to an element in $C$ is edges that go from a vertex in $X$ to a vertex in $B \setminus Y$. From 1), we know that there is no edge of $G$ from $X$ to $B \setminus Y$. Thus, our cover is valid and covers all edges.
+3. Suppose that this is false. In that case, for a vertex $u \in Y$ and $v \in A \setminus X$, there exists an edge $e : \{ u, v \}$ in the graph $G$. However, this would mean that we could add the edge $e$ to the odd alternating path $P(u)$ from $X_0$ to get an even alternating path to $v$, which would mean that $v \in X$, a contradiction.
+4. From 1) and 3), we know that every edge in $M$ joins a vertex in $X$ to a vertex in $Y$ or joins a vertex in $A \setminus X$ to a vertex in $B \setminus Y$. The number of edges of the first type is $|Y| - |U|$. Also, since $X_0 \subset X$, every vertex in $A \setminus X$ is saturated. Thus, the number of edges of the second type is $|A \setminus X|$. It follows that
+   $$|M| = |Y| - |U| + |A \setminus X|$$Note that from 2), we know that $|C| = |Y| + |A \setminus X|$. Thus, we can finally say
+   $$|M| = |C| - |U|$$
+5. if $U$ is not empty, then we know that all $v \in U$ are unsaturated vertices. Thus, $P(v)$ is an augmenting path.
+
+
+### Proof of König’s Theorem
+Assume that $M$ is the maximum matching of a graph $G$. Then, by Lemma 8.1.1, and 5) of Lemma 8.3.2, we know that $U$ should be empty. Thus $|U| = 0$. Thus, from 2) and 4) of Lemma 8.3.2, we know that $C = Y \cup (A \setminus X)$, and that $|M| = |C|$. From Lemma 8.2.2, our result follows.
+
+
+### Bipartite Graph Edges/Matching Result
+Let $G$ be a bipartite graph with bipartition $A, B,$ where $|A| = |B| = n$. Prove that if $G$ has $q$ edges, then $G$ has a matching of size at least $\dfrac{q}{n}$.
+
+**Proof**:
+Suppose that $C$ is a cover of $G$. There can be at most $n$ edges incident to a vertex in $C$. Thus, the total number of edges incident to $C$ will at most be $n |C|$. However, $C$ is a cover so we know that every edge in $G$ is incident to $C$. Thus, we know that $n |C| \leq q$. Hence Proved
+
+
+### Hall's Theorem (Theorem 8.4.1)
+A bipartite graph $G$ with bipartition $A,B$ has a matching saturating every vertex in $A$, if and only if every subset $D$ of $A$ satisfies $$|N(D)| \geq |D|$$
+**Proof:**
+$(\implies)$ 
+Let us assume that $G$ does have a matching $M$ saturing ever vertex in $A$. Then, for any subset $D$ of $A$, $N(D)$ contains the other end of the edge of $M$ incident with $v$ for every $v \in D$, and these vertices must all be distinct because matchings don't share vertices. Thus, $|N(D)| \geq |D|$.
+
+$(\impliedby)$
+We prove the contrapositive. Thus, we prove that A bipartite graph $G$ with bipartition $A, B$ doesn't have a matching saturating every vertex in $A$ if and only if there exists a subset $D$ of $A$ that satisfies $|N(D)| \geq |D|$.
+
+Let us assume that $G$ does not have a matching saturing every vertex in $A$. Thus, 
+every subset $D$ of $A$ satisfies $|N(D) \geq |D|$ for $G$. Let $M$ be a maximum matching in $G$. Then, $|M| < |A|$. By Konig's Theorem, there must be a cover $C$ such that $|M| = |C|$. Thus, $|C| < |A|$.
+
+Now, consider the 4 sets: $A \cap C$, $A \setminus C$, $B \cap C$, $B \setminus C$. Note how there can not be an edge between $A \setminus C$ and $B \setminus C$ because $C$ is a cover and there can not be an edge that isn't incident with our valid cover. Thus, all neighbours of $A \setminus C$ are in $B \cap C$, that is, $N(A \setminus C) \subset (B \cap C)$. Now, $C = (A \cap C) \cup (B \cap C)$ and $A = (A \cap C)  \cup (A \setminus C)$. Also, we know that $|C| < |A|$. Thus, we know that 
+$$|A \cap C| + |B \cap C| < (A \cap C) + (A \setminus C) $$
+We can write this as
+$$|B \cap C| < (A \setminus C)$$
+However, note that we showed earlier that $N(A \setminus C) \subset (B \cap C)$. Thus, since for $D = (A \setminus C)$, we can say
+$$|N(D)| < |D|$$
+We have proved the hypothesis
+$\blacksquare$
+
