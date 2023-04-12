@@ -525,7 +525,7 @@ An augmenting path with respect to $M$ is an alternating path joining two distin
 If $M$ has an augmenting path, it is not a maximum matching.
 
 ### Cover
-A cover of a graph $G$ is a set C $of$ vertices such that every edge of G $has$ at least one end in $C$.
+A cover of a graph $G$ is a set C $of$ vertices such that every edge of $G$ has at least one end in $C$.
 
 ### Lemma 8.2.1
 If $M$ is a matching of $G$ and $C$ is a cover of $G$, then $|M| \leq |C|$
@@ -597,5 +597,40 @@ $$|B \cap C| < (A \setminus C)$$
 However, note that we showed earlier that $N(A \setminus C) \subset (B \cap C)$. Thus, since for $D = (A \setminus C)$, we can say
 $$|N(D)| < |D|$$
 We have proved the hypothesis
+$\blacksquare$
+
+### Hall’s SDR Theorem (Corollary 8.5.1)
+This theorem is nothing but a restatement of Theorem 8.4.1 in the language of SDR’s.
+
+The collection $Q_1, Q_2, \dots, Q_n$ of subsets of the finite set $Q$ has an SDR if and only if for every subset $J$ of $\{ 1, 2, 3, \dots, n\}$, we have $$|\sum_{i \in J}Q_i| \geq |J|$$
+### Corollary 8.6.1
+A bipartite graph with bipartition $A, B$ has a perfect matching if and only if $|A| = |B|$ and every subset $D$ of $A$ satisfies $$|N(D)| \geq |D|$$
+### Theorem 8.6.2
+If $G$ is a k-regular bipartite graph with $k \geq 1$, then $G$ has a perfect matching.
+
+**Proof:**
+Let $A, B$, be a bipartition of $G$. Then, since every edge has one end in $A$ and the other end in $B$, we have $\sum_{v \in A} \deg(v) = \sum_{v \in B} \deg(v)$. It follows that $k |A| = k |B|$, and therefore, sicne $k > 0$, that $|A = |B|$. Now, let $D \subset A$. Then, since every edge incident with a vertex in $D$ has its other end in $N(D)$, we have $$\sum_{v \in D} \deg(v) \leq \sum_{v \in N(D)} \deg(v)$$
+It follows that $k |D| \leq k |N(D)|$, and therefore (again, since $k > 0$) that $|N(D)| \geq |D|$. Now, by Corollary 8.6.1, $G$ has a perfect matching.
+
+Note: this theorem works even if $G$ contains multiple edges.
+
+
+### Edge-colouring
+An edge k-colouring of a graph $G$ is an assignment of one of a set of $k$ colours to each edge of $G$ so that two edges incident with the same vertex are assigned different colours
+
+### Theorem 8.7.1
+A bipartite graph with maximum degree $d$ has an edge $d$-colouring.
+
+### Lemma 8.7.2
+Let $G$ be a bipartite graph having at least one edge. Then, $G$ has a matching saturating each vertex of maximum degree. 
+
+**Proof**:
+Let $A, B$, be a bipartition of $G$ and $K = \{ v \in V : \deg(v) = d\}$. Let $M$ be a maximum matching that leaves as few elements of $K$ unsaturated as possible. If $M$ saturates all elements of $K$, we are finished. Otherwise, we may assume by interchanging $A$ with $B$ if necessary, that there is a vertex in $A \cap K$ that is not saturated by $M$. Apply the XY-construction, except that we define $X_0$ to consist only of the unsaturated vetices in $A \cap K$. Then $Y$ contains no unsaturated vertex, since $M$ is a maximum matching.
+
+Suppose there is a vertex $w \in X$ having degree less than $d$. Consider the alternating path $P(w)$. It has even length. If we replace the edges of $M$ that are in $P(w)$ by those that are not, we get another maximum matching, but one that leaves fewer elements of $K$ unsaturated, a contradiction to the choice of $M$. So, every vertex in $X$ has degree $d$.
+
+BY the construction and the fact that $M$ is maximum, for every $u \in Y$ there is an edge of $M$ joining $u$ to some vertex in $x$. Since $X$ contains at least one unsaturated vertex, $|X| > |Y|$. Moreover, again by the construction, there is noe dge from $X$ to $B \setminus Y$, so $N(X) \subset Y$. Therefore, 
+$$d|Y| < d|X| = \sum_{v \in X} \deg(v) \leq \sum_{v \in Y} \deg(v) \leq d|Y|$$
+a contradiction. Therfore, there are no vetices in $K$ not saturated by $M$, and we are done. 
 $\blacksquare$
 
