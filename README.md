@@ -410,7 +410,7 @@ $K_5$ is not planar
 
 **Proof:** $|E(K_5)| = {5 \choose 2} = 10$
 
-From Theorem 7.5.3, we know that for planar graphs with $p \geq 3$,  $q \leq 2p - 6$. In this case, theorem tells us that $q \leq 3(5) - 6) = 9$. However, $10 > 9$, so $K_5$ is not planar.
+From Theorem 7.5.3, we know that for planar graphs with $p \geq 3$,  $q \leq 3p - 6$. In this case, theorem tells us that $q \leq 3(5) - 6) = 9$. However, $10 > 9$, so $K_5$ is not planar.
 
 ### Corollary 7.5.5
 A planar graph has a vertex of degree at most $5$.
