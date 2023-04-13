@@ -485,7 +485,7 @@ Let us assume that all graphs where $p \leq k$ and $k \geq 1$ are 6-colourable.
 Consider a graph with $p = k + 1$ vertices. From Corollary 7.7.5, we know that since $G$ is planar, $G$ has a vertex $v$ of degree at most $5$. Suppose we remove vertex $v$ and all edges incident to it. We then end up with a subgraph $H$ which has $k$ vertices. From our inductive hypothesis, we know that graph $H$ is 6-colourable. Now, we find a 6-colouring of $H$. There are at most $5$ vertices adjacent to $v$ in $G$, so these vertices are assigned at most $5$ different colours. Thus, there is at least one of the $6$ colours remaining. We can assign one of those colours to $v$, so that $v$ has a different colour than all of its adjacent vertices in $G$. Thus, we have a 6-colouring for $G$ and the inductive hypothesis is true for $k + 1$. Thus, hypothesis is true by POMI.
 
 ### Contracting Edges
-Let $G$ be a graph and let $e = \{x, y\}$ be an edge of $G$. The graph $G - e$ obtained from $G$ by contracting the edge $e$ is the graph with vertex set $V(G) \ \{ x, y\} \cup {z}$, where $z$ is a new vertex, and edge set.
+Let $G$ be a graph and let $e = \{x, y\}$ be an edge of $G$. The graph $G - e$ obtained from $G$ by contracting the edge $e$ is the graph with vertex set $V(G) \setminus \{ x, y\} \cup {z}$, where $z$ is a new vertex, and edge set.
 $$ \{ \{u, v \}\in E(G) : \{u, v\} \cap\{x, y\} = \phi\} \cup \{\{u, z\} : u \notin \{x, y\} , \{u, w\} \in E(G) \,\text{for some} \,w \in \{x, y\} \} $$
 
 ### Theorem 7.7.6
@@ -575,7 +575,7 @@ Assume that $M$ is the maximum matching of a graph $G$. Then, by Lemma 8.1.1, an
 Let $G$ be a bipartite graph with bipartition $A, B,$ where $|A| = |B| = n$. Prove that if $G$ has $q$ edges, then $G$ has a matching of size at least $\dfrac{q}{n}$.
 
 **Proof**:
-Suppose that $C$ is a cover of $G$. There can be at most $n$ edges incident to a vertex in $C$. Thus, the total number of edges incident to $C$ will at most be $n |C|$. However, $C$ is a cover so we know that every edge in $G$ is incident to $C$. Thus, we know that $n |C| \leq q$. Hence Proved
+Suppose that $C$ is a cover of $G$. There can be at most $n$ edges incident to a vertex in $C$. Thus, the total number of edges incident to $C$ will at most be $n |C|$. However, $C$ is a cover so we know that every edge in $G$ is incident to $C$. Thus, we know that $n |C| \geq q$. Hence Proved
 
 
 ### Hall's Theorem (Theorem 8.4.1)
@@ -609,7 +609,7 @@ A bipartite graph with bipartition $A, B$ has a perfect matching if and only if 
 If $G$ is a k-regular bipartite graph with $k \geq 1$, then $G$ has a perfect matching.
 
 **Proof:**
-Let $A, B$, be a bipartition of $G$. Then, since every edge has one end in $A$ and the other end in $B$, we have $\sum_{v \in A} \deg(v) = \sum_{v \in B} \deg(v)$. It follows that $k |A| = k |B|$, and therefore, sicne $k > 0$, that $|A = |B|$. Now, let $D \subset A$. Then, since every edge incident with a vertex in $D$ has its other end in $N(D)$, we have $$\sum_{v \in D} \deg(v) \leq \sum_{v \in N(D)} \deg(v)$$
+Let $A, B$, be a bipartition of $G$. Then, since every edge has one end in $A$ and the other end in $B$, we have $\sum_{v \in A} \deg(v) = \sum_{v \in B} \deg(v)$. It follows that $k |A| = k |B|$, and therefore, since $k > 0$, that $|A = |B|$. Now, let $D \subset A$. Then, since every edge incident with a vertex in $D$ has its other end in $N(D)$, we have $$\sum_{v \in D} \deg(v) \leq \sum_{v \in N(D)} \deg(v)$$
 It follows that $k |D| \leq k |N(D)|$, and therefore (again, since $k > 0$) that $|N(D)| \geq |D|$. Now, by Corollary 8.6.1, $G$ has a perfect matching.
 
 Note: this theorem works even if $G$ contains multiple edges.
@@ -629,7 +629,7 @@ Let $A, B$, be a bipartition of $G$ and $K = \{ v \in V : \deg(v) = d\}$. Let $M
 
 Suppose there is a vertex $w \in X$ having degree less than $d$. Consider the alternating path $P(w)$. It has even length. If we replace the edges of $M$ that are in $P(w)$ by those that are not, we get another maximum matching, but one that leaves fewer elements of $K$ unsaturated, a contradiction to the choice of $M$. So, every vertex in $X$ has degree $d$.
 
-BY the construction and the fact that $M$ is maximum, for every $u \in Y$ there is an edge of $M$ joining $u$ to some vertex in $x$. Since $X$ contains at least one unsaturated vertex, $|X| > |Y|$. Moreover, again by the construction, there is noe dge from $X$ to $B \setminus Y$, so $N(X) \subset Y$. Therefore, 
+By the construction and the fact that $M$ is maximum, for every $u \in Y$ there is an edge of $M$ joining $u$ to some vertex in $x$. Since $X$ contains at least one unsaturated vertex, $|X| > |Y|$. Moreover, again by the construction, there is noe dge from $X$ to $B \setminus Y$, so $N(X) \subset Y$. Therefore, 
 $$d|Y| < d|X| = \sum_{v \in X} \deg(v) \leq \sum_{v \in Y} \deg(v) \leq d|Y|$$
 a contradiction. Therfore, there are no vetices in $K$ not saturated by $M$, and we are done. 
 $\blacksquare$
